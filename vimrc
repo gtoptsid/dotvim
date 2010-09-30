@@ -24,6 +24,9 @@ set backupskip+=/var/spool/cron/*
 set listchars=eol:$,tab:»-,trail:·
 "set listchars=eol:$,tab:\|\ ,trail:·
 
+" Εισαγωγή μόνο του μεγαλύτερου κοινού μέρους των συμπληρώσεων
+set completeopt=longest,menu
+
 set autoindent          " Αντιγραφή της εσοχής της προηγούμενης γραμμής
                         " στην επόμενη. Διορθώνει ένα πρόβλημα.
 set autoread            " Διαβάζει ξανά το αρχείο αν έχει αλλάξει
@@ -176,6 +179,8 @@ augroup vimrcEx
   " να επιτευχθεί χρησιμοποιώντας τον συντακτικό χρωματισμό.
   " syn match TooLong /\%>80.\+$/ και highlight TooLong ctermfg=red
   autocmd FileType c setlocal colorcolumn=+0
+  " Χρήση της συνάρτησης Smart_Tab κάθε φορά που πληκτρολογείται το Tab
+  autocmd FileType c inoremap <buffer> <expr> <Tab> <SID>Smart_Tab()
   " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
   autocmd BufNewFile *.c call <SID>Insert_License()
   " Αυτόματη εισαγωγή προστασίας από πολλαπλή δήλωση σε αρχεία κεφαλίδας
@@ -229,6 +234,22 @@ function! s:Switch_Source_Header()
   if (filereadable(l:myname))
     exe "find " . l:myname
   endif
+endfunction
+
+function! s:Smart_Tab()
+  if pumvisible()
+    " Όταν είναι ενεργό το μενού μεταφορά στο επόμενο αποτέλεσμα
+    return "\<C-N>"
+  endif
+  let l:line = getline('.')                  " Η τρέχουσα γραμμή
+  " Από την αρχή μέχρι μια θέση πριν το δρομέα
+  let l:str = strpart(l:line, 0, col('.')-1)
+
+  " Συμπλήρωση των πεδίων μιας δομής
+  if (l:str =~ '\.$' || l:str =~ '->$')
+    return "\<C-X>\<C-O>"
+  else
+    return "\<Tab>"
 endfunction
 
 " }}}
