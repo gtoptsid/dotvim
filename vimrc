@@ -160,6 +160,7 @@ nmap <leader>cn :cnext<cr>    " εμφάνιση του επόμενου μην�
 nmap <leader>cp :cprev<cr>    " εμφάνιση του προηγούμενου μηνύματος
 nmap <leader>mk :make<cr>     " εκτέλεση του makeprg
 nmap <leader>s  :call <SID>Switch_Source_Header()<cr>
+nmap <leader>ut :call <SID>UpSysTags()<cr> " Λειτουργεί μόνο σε Slackware
 
 " }}}
 
@@ -179,6 +180,8 @@ augroup vimrcEx
   " να επιτευχθεί χρησιμοποιώντας τον συντακτικό χρωματισμό.
   " syn match TooLong /\%>80.\+$/ και highlight TooLong ctermfg=red
   autocmd FileType c setlocal colorcolumn=+0
+  " Πρόσθεση της διαδρομής του αρχείου glibc στην αναζήτηση ετικετών
+  autocmd FileType c setlocal tags+=~/.vim/tags/glibc
   " Χρήση της συνάρτησης Smart_Tab κάθε φορά που πληκτρολογείται το Tab
   autocmd FileType c inoremap <buffer> <expr> <Tab> <SID>Smart_Tab()
   " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
@@ -269,6 +272,16 @@ function! s:Smart_Tab()
     endwhile
     return l:sp
   endif
+endfunction
+
+" Λειτουργεί μόνο σε Slackware
+function! s:UpSysTags()
+  let l:glibc = expand("/var/log/packages/glibc-[0-9]*")
+  let l:glibc = "grep include.*\\.h$ " . l:glibc
+  let l:headers = system(l:glibc)
+  let l:headers = substitute(l:headers, '^\|\n', " /", "g")
+  exe "silent !ctags --c-kinds=+pl -f $HOME/.vim/tags/glibc " . l:headers
+  exe "redraw!"
 endfunction
 
 " }}}
