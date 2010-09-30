@@ -72,6 +72,10 @@ nmap <silent> <F2> :set list!<cr>
 imap <silent> <F2> <esc>:set list!<cr>a
 " imap <silent> <F2> <C-O>:set list!<cr>
 
+" Το πλήκτρο F3 ρυθμίζει την επιλογή number
+nmap <silent> <F3> :set number!<cr>
+imap <silent> <F3> <esc>:set number!<cr>a
+
 " }}}
 
 " Autocommands {{{
