@@ -135,6 +135,10 @@ nmap <leader>n  :next<cr>     " μεταφορά στο επόμενο αρχε�
 nmap <leader>p  :prev<cr>     " μεταφορά στο προηγούμενο αρχείο
 nmap <leader>bn :bnext<cr>    " μεταφορά στο επόμενο buffer
 nmap <leader>bp :bprev<cr>    " μεταφορά στο προηγούμενο buffer
+nmap <leader>to :tabnew<cr>   " άνοιγμα νέας καρτέλας
+nmap <leader>tc :tabclose<cr> " κλείσιμο τρέχουσας καρτέλας
+nmap <leader>tn :tabnext<cr>  " μεταφορά στην επόμενη καρτέλα
+nmap <leader>tp :tabprev<cr>  " μεταφορά στην προηγούμενη καρτέλα
 
 " }}}
 
