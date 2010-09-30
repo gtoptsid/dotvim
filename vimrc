@@ -76,6 +76,10 @@ imap <silent> <F2> <esc>:set list!<cr>a
 nmap <silent> <F3> :set number!<cr>
 imap <silent> <F3> <esc>:set number!<cr>a
 
+" Το πλήκτρο F10 ρυθμίζει την επιλογή hls
+nmap <silent> <F10> :set hls!<cr>
+imap <silent> <F10> <esc>:set hls!<cr>a
+
 " }}}
 
 " Autocommands {{{
