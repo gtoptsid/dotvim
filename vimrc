@@ -83,6 +83,13 @@ imap <silent> <F10> <esc>:set hls!<cr>a
 " (Απ)ενεργοποίηση της δυνατότητας επικόλλησης
 set pastetoggle=<F12>
 
+nnoremap <Left>     :echoerr "Το h αγκάθια έχει?"<cr>
+nnoremap <Down>     :echoerr "Το j αγκάθια έχει?"<cr>
+nnoremap <Up>       :echoerr "Το k αγκάθια έχει?"<cr>
+nnoremap <Right>    :echoerr "Το l αγκάθια έχει?"<cr>
+nnoremap <PageUp>   :echoerr "Το Ctrl-B αγκάθια έχει?"<cr>
+nnoremap <PageDown> :echoerr "Το Ctrl-F αγκάθια έχει?"<cr>
+
 " }}}
 
 " Autocommands {{{
