@@ -85,6 +85,16 @@ filetype plugin indent on
 
 " }}}
 
+" Μεταβλητές {{{
+
+" Χρήση του τύπου C αντί για C++ για τα αρχεία κεφαλίδων .h
+let c_syntax_for_h = 1
+
+let mapleader = ','
+let maplocalleader = ','
+
+" }}}
+
 " Συνδυασμοί πλήκτρων {{{
 
 " Αντί για την κατάσταση Ex, το Q θα χρησιμεύει για την μορφοποίηση.
@@ -145,11 +155,4 @@ augroup vimrcEx
   \ unlet! s:name
 
 augroup END
-" }}}
-
-" Μεταβλητές {{{
-
-" Χρήση του τύπου C αντί για C++ για τα αρχεία κεφαλίδων .h
-let c_syntax_for_h = 1
-
 " }}}
