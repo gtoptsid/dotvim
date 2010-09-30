@@ -253,7 +253,7 @@ function! s:Smart_Tab()
   " Έλεγχος
   let l:ind = cindent('.')      " Το επίπεδο εσοχής της τρέχουσας γραμμής
   let l:vcol = virtcol('.')     " Η στήλη στην οποία βρίσκεται ο δρομέας
-  if (l:vcol < l:ind)
+  if ((l:vcol < l:ind) && (l:str =~ '^\s*$'))
     return "\<Tab>"             " Δεν έχει περάσει το επίπεδο εσοχής άρα Tab
   else
     let l:num = l:vcol % &sw
