@@ -156,6 +156,7 @@ nmap <leader>cc :cclose<cr>   " κλείσιμο του παραθύρου λα�
 nmap <leader>cn :cnext<cr>    " εμφάνιση του επόμενου μηνύματος
 nmap <leader>cp :cprev<cr>    " εμφάνιση του προηγούμενου μηνύματος
 nmap <leader>mk :make<cr>     " εκτέλεση του makeprg
+nmap <leader>s  :call <SID>Switch_Source_Header()<cr>
 
 " }}}
 
@@ -209,6 +210,20 @@ function! s:Insert_Guard()
   normal! 3o
   exe "normal! o#endif /* " . l:gname . " */"
   normal! kk
+endfunction
+
+function! s:Switch_Source_Header()
+  let l:curname = expand("%:r") " το όνομα χωρίς επέκταση
+  let l:curext  = expand("%:e") " η επέκταση του αρχείου
+  let l:myname  = ""
+  if (l:curext == "c")
+    let l:myname = l:curname . ".h"
+  elseif (l:curext == "h")
+    let l:myname = l:curname . ".c"
+  endif
+  if (filereadable(l:myname))
+    exe "find " . l:myname
+  endif
 endfunction
 
 " }}}
