@@ -19,6 +19,8 @@ set backspace=indent,eol,start
 " Δεν θα διατηρούνται αρχεία backup για τους παρακάτω καταλόγους.
 set backupskip+=/var/spool/cron/*
 
+set autoread            " Διαβάζει ξανά το αρχείο αν έχει αλλάξει
+                        " από τότε που ανοίχθηκε.
 set nobackup            " Μη χρήση των αρχείων backup.
 set history=50          " Διατήρηση των τελευταίων 50 γραμμών στην ιστορία.
 set hlsearch            " Χρωματισμός των αποτελεσμάτων εύρεσης.
