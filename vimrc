@@ -1,72 +1,57 @@
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2008 Dec 17
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-" When started as "evim", evim.vim will already have done these settings.
+" Αν εκτελεστεί το "evim", θα έχουν ήδη ενεργοποιηθεί οι παρακάτω ρυθμίσεις.
 if v:progname =~? "evim"
   finish
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
+" Απενεργοποίηση της συμβατότητας με το απλό vi και χρήση των ρυθμίσεων
+" του vim. Πρέπει να είναι πρώτο γιατί επηρεάζει τις υπόλοιπες ρυθμίσεις.
 set nocompatible
 
-" allow backspacing over everything in insert mode
+" Στην λειτουργία εισαγωγής, το backspace θα λειτουργεί στα πάντα
+" (πχ όταν ο δρομέας είναι στην αρχή της γραμμής και πατηθεί το backspace
+" θα πηγαίνει στην προηγούμενη γραμμή).
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup          " Μη χρήση των αρχείων backup.
 else
-  set backup		" keep a backup file
+  set backup            " Χρήση των αρχείων backup.
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=50          " Διατήρηση των τελευταίων 50 γραμμών στην ιστορία.
+set ruler               " Εμφάνιση της θέσης του δρομέα συνέχεια.
+set showcmd             " Εμφάνιση ημιτελών εντολών.
+set incsearch           " Τμηματική εύρεση.
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
+" Αντί για την κατάσταση Ex, το Q θα χρησιμεύει για την μορφοποίηση.
 map Q gq
 
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
+" Το CTRL-U σβήνει όλη τη γραμμή. Για αυτό το λόγο καλύτερα να γίνεται
+" χρήση του CTRL-G u πρώτα ώστε να μπορεί να γίνει εύκολα αναίρεση
+" σε περίπτωση λάθους.
 inoremap <C-U> <C-G>u<C-U>
 
-" In many terminal emulators the mouse works just fine, thus enable it.
+" Ενεργοποίηση της λειτουργίας ποντικιού.
 if has('mouse')
   set mouse=a
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
+" Ενεργοποίηση της συντακτικής προβολής εφόσον το τερματικό διαθέτει χρώματα.
+" Επίσης ενεργοποίηση της προβολής των αποτελεσμάτων εύρεσης.
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
 
-" Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
+  " Ενεργοποίηση του αυτόματου εντοπισμού τύπου του αρχείου και των εσοχών
+  " στο κείμενο ανάλογα με το τύπο.
   filetype plugin indent on
 
-  " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
   au!
 
-  " For all text files set 'textwidth' to 78 characters.
+  " Η κάθε γραμμή να περιέχει το πολύ 78 χαρακτήρες για τα αρχεία κειμένου.
   autocmd FileType text setlocal textwidth=78
 
   " When editing a file, always jump to the last known cursor position.
@@ -83,11 +68,11 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
+  set autoindent                " always set autoindenting on
 
 endif " has("autocmd")
 
-" Make vim work with the 'crontab -e' command
+" Δεν θα διατηρούνται αρχεία backup για τους παρακάτω καταλόγους.
 set backupskip+=/var/spool/cron/*
 
 " Convenient command to see the difference between the current buffer and the
@@ -95,5 +80,5 @@ set backupskip+=/var/spool/cron/*
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+  \ | wincmd p | diffthis
 endif
