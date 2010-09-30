@@ -162,6 +162,8 @@ augroup vimrcEx
   " της γλώσσας C. Η αυτόματη αναδίπλωση γίνεται για τα σχόλια αλλά όχι
   " για τον κώδικα.
   autocmd FileType c setlocal textwidth=80
+  " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
+  autocmd BufNewFile *.c call <SID>Insert_License()
 
   " Μεταφορά του δρομέα στο τέλος του αρχείου όταν πρόκειται για αρχείο
   " καταχωρήσεων. Ο κατάλογος /var/log στο Slackware περιέχει και άλλους
@@ -175,4 +177,14 @@ augroup vimrcEx
   \ unlet! s:name
 
 augroup END
+" }}}
+
+" Συναρτήσεις {{{
+
+function! s:Insert_License()
+  let l:license = "~/.vim/.COPYING"
+  exe "0read " . l:license
+  normal! G
+endfunction
+
 " }}}
