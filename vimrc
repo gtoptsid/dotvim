@@ -167,6 +167,8 @@ augroup vimrcEx
   autocmd FileType c setlocal textwidth=80
   " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
   autocmd BufNewFile *.c call <SID>Insert_License()
+  " Αυτόματη εισαγωγή προστασίας από πολλαπλή δήλωση σε αρχεία κεφαλίδας
+  autocmd BufNewFile *.h call <SID>Insert_Guard()
 
   " Μεταφορά του δρομέα στο τέλος του αρχείου όταν πρόκειται για αρχείο
   " καταχωρήσεων. Ο κατάλογος /var/log στο Slackware περιέχει και άλλους
@@ -190,6 +192,18 @@ function! s:Insert_License()
     exe "0read " . l:license
   endif
   normal! G
+endfunction
+
+function! s:Insert_Guard()
+  call <SID>Insert_License()
+  let l:gname = expand("%:t")                        " το όνομα χωρίς διαδρομή
+  let l:gname = toupper(l:gname)                     " μετατροπή σε κεφαλαία
+  let l:gname = substitute(l:gname, "\\.", "_", "g") " αλλαγή . σε _
+  exe "normal! i#ifndef " . l:gname
+  exe "normal! o#define " . l:gname
+  normal! 3o
+  exe "normal! o#endif /* " . l:gname . " */"
+  normal! kk
 endfunction
 
 " }}}
