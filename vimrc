@@ -65,5 +65,16 @@ augroup vimrcEx
   " Η κάθε γραμμή να περιέχει το πολύ 78 χαρακτήρες για τα αρχεία κειμένου.
   autocmd FileType text setlocal textwidth=78
 
+  " Μεταφορά του δρομέα στο τέλος του αρχείου όταν πρόκειται για αρχείο
+  " καταχωρήσεων. Ο κατάλογος /var/log στο Slackware περιέχει και άλλους
+  " καταλόγους, οπότε αυτοί πρέπει να εξαιρεθούν.
+  " Αντί για το match, μπορεί να χρησιμοποιηθεί stridx(s:name,'/',9).
+  autocmd BufReadPost /var/log/*
+  \ let s:name = expand("<afile>:p") |
+  \ if match(s:name,'/',0,4) == -1 |
+  \   exe "normal G" |
+  \ endif |
+  \ unlet! s:name
+
 augroup END
 " }}}
