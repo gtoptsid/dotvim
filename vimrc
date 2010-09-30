@@ -182,8 +182,10 @@ augroup END
 " Συναρτήσεις {{{
 
 function! s:Insert_License()
-  let l:license = "~/.vim/.COPYING"
-  exe "0read " . l:license
+  let l:license = expand("~/.vim/.COPYING")
+  if (filereadable(l:license))
+    exe "0read " . l:license
+  endif
   normal! G
 endfunction
 
