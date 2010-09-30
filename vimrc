@@ -30,6 +30,7 @@ set autoread            " Διαβάζει ξανά το αρχείο αν έχ�
                         " από τότε που ανοίχθηκε.
 set background=dark     " Το φόντο του τερματικού είναι σκοτεινό.
 set nobackup            " Μη χρήση των αρχείων backup.
+set cinoptions+=:0      " Μη χρήση εσοχής για τις ετικέτες case μέσα σε switch
 set encoding=utf-8      " Χρήση της κωδικοποίησης UTF-8
 set noexpandtab         " Θα χρησιμοποιούνται Tabs και όχι spaces.
 set fencs=utf-8,cp1253  " Όταν διαβάζεται ένα αρχείο,
