@@ -248,8 +248,27 @@ function! s:Smart_Tab()
   " Συμπλήρωση των πεδίων μιας δομής
   if (l:str =~ '\.$' || l:str =~ '->$')
     return "\<C-X>\<C-O>"
+  endif
+
+  " Έλεγχος
+  let l:ind = cindent('.')      " Το επίπεδο εσοχής της τρέχουσας γραμμής
+  let l:vcol = virtcol('.')     " Η στήλη στην οποία βρίσκεται ο δρομέας
+  if (l:vcol < l:ind)
+    return "\<Tab>"             " Δεν έχει περάσει το επίπεδο εσοχής άρα Tab
   else
-    return "\<Tab>"
+    let l:num = l:vcol % &sw
+    if (l:num != 0)
+      " Αριθμός spaces που χρειάζονται για να μεταφερθεί ο δρομέας σε στήλη
+      " της οποίας ο αριθμός είναι πολλαπλάσιο του shiftwidth
+      let l:num = &sw - l:num
+    endif
+    let l:sp = ""
+    while l:num >= 0            " Μεταφορά του δρομέα μία στήλη δεξιά λόγω >=
+      let l:sp = l:sp . " "
+      let l:num = l:num - 1
+    endwhile
+    return l:sp
+  endif
 endfunction
 
 " }}}
