@@ -80,6 +80,9 @@ imap <silent> <F3> <esc>:set number!<cr>a
 nmap <silent> <F10> :set hls!<cr>
 imap <silent> <F10> <esc>:set hls!<cr>a
 
+" (Απ)ενεργοποίηση της δυνατότητας επικόλλησης
+set pastetoggle=<F12>
+
 " }}}
 
 " Autocommands {{{
