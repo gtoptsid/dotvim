@@ -115,6 +115,9 @@ imap <silent> <F2> <esc>:set list!<cr>a
 nmap <silent> <F3> :set number!<cr>
 imap <silent> <F3> <esc>:set number!<cr>a
 
+" Το πλήκτρο F5 εκτελεί την εντολή make
+nmap <silent> <F5> :make<cr>
+
 " Το πλήκτρο F10 ρυθμίζει την επιλογή hls
 nmap <silent> <F10> :set hls!<cr>
 imap <silent> <F10> <esc>:set hls!<cr>a
@@ -139,6 +142,12 @@ nmap <leader>to :tabnew<cr>   " άνοιγμα νέας καρτέλας
 nmap <leader>tc :tabclose<cr> " κλείσιμο τρέχουσας καρτέλας
 nmap <leader>tn :tabnext<cr>  " μεταφορά στην επόμενη καρτέλα
 nmap <leader>tp :tabprev<cr>  " μεταφορά στην προηγούμενη καρτέλα
+nmap <leader>cl :clist<cr>    " εμφάνιση των μηνυμάτων λάθους
+nmap <leader>cw :cwin 5<cr>   " δημιουργία παραθύρου, εμφάνιση των λαθών εκεί
+nmap <leader>cc :cclose<cr>   " κλείσιμο του παραθύρου λαθών
+nmap <leader>cn :cnext<cr>    " εμφάνιση του επόμενου μηνύματος
+nmap <leader>cp :cprev<cr>    " εμφάνιση του προηγούμενου μηνύματος
+nmap <leader>mk :make<cr>     " εκτέλεση του makeprg
 
 " }}}
 
