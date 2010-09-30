@@ -90,6 +90,11 @@ filetype plugin indent on
 " Χρήση του τύπου C αντί για C++ για τα αρχεία κεφαλίδων .h
 let c_syntax_for_h = 1
 
+" Απενεργοποίηση του netrw plugin που επιτρέπει την επεξεργασία
+" αρχείων μέσω δικτύου και την περιήγηση καταλόγων
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 let mapleader = ','
 let maplocalleader = ','
 
