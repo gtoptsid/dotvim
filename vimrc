@@ -129,6 +129,13 @@ nnoremap <Right>    :echoerr "Το l αγκάθια έχει?"<cr>
 nnoremap <PageUp>   :echoerr "Το Ctrl-B αγκάθια έχει?"<cr>
 nnoremap <PageDown> :echoerr "Το Ctrl-F αγκάθια έχει?"<cr>
 
+nmap <leader>w  :w<cr>        " αποθήκευση του αρχείου
+nmap <leader>q  :q<cr>        " έξοδος από το vim
+nmap <leader>n  :next<cr>     " μεταφορά στο επόμενο αρχείο
+nmap <leader>p  :prev<cr>     " μεταφορά στο προηγούμενο αρχείο
+nmap <leader>bn :bnext<cr>    " μεταφορά στο επόμενο buffer
+nmap <leader>bp :bprev<cr>    " μεταφορά στο προηγούμενο buffer
+
 " }}}
 
 " Autocommands {{{
