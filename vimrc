@@ -171,6 +171,11 @@ augroup vimrcEx
   " της γλώσσας C. Η αυτόματη αναδίπλωση γίνεται για τα σχόλια αλλά όχι
   " για τον κώδικα.
   autocmd FileType c setlocal textwidth=80
+  " Τονισμός της στήλης που βρίσκεται στο επιτρεπόμενο textwidth,
+  " όπως στα eclipse,netbeans. Ένα παρόμοιο αποτέλεσμα μπορεί
+  " να επιτευχθεί χρησιμοποιώντας τον συντακτικό χρωματισμό.
+  " syn match TooLong /\%>80.\+$/ και highlight TooLong ctermfg=red
+  autocmd FileType c setlocal colorcolumn=+0
   " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
   autocmd BufNewFile *.c call <SID>Insert_License()
   " Αυτόματη εισαγωγή προστασίας από πολλαπλή δήλωση σε αρχεία κεφαλίδας
