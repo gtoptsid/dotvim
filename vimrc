@@ -19,6 +19,11 @@ set backspace=indent,eol,start
 " Δεν θα διατηρούνται αρχεία backup για τους παρακάτω καταλόγους.
 set backupskip+=/var/spool/cron/*
 
+" Χρήση του $ για το τέλος της γραμμής, της τελείας . για τις space
+" στο τέλος της γραμμής και των >- για το tab (πχ >------- για 8άρι tab)
+set listchars=eol:$,tab:»-,trail:·
+"set listchars=eol:$,tab:\|\ ,trail:·
+
 set autoread            " Διαβάζει ξανά το αρχείο αν έχει αλλάξει
                         " από τότε που ανοίχθηκε.
 set background=dark     " Το φόντο του τερματικού είναι σκοτεινό.
@@ -37,6 +42,7 @@ set viminfo="NONE"      " Μη χρήση του .viminfo
 " Ενεργοποίηση της συντακτικής προβολής εφόσον το τερματικό διαθέτει χρώματα.
 if &t_Co > 2 || has("gui_running")
   syntax on
+  highlight SpecialKey ctermfg=red  " Χρήση κόκκινου χρώματος για την list.
 endif
 
 " Ενεργοποίηση του αυτόματου εντοπισμού τύπου του αρχείου και των εσοχών
@@ -54,6 +60,12 @@ map Q gq
 " χρήση του CTRL-G u πρώτα ώστε να μπορεί να γίνει εύκολα αναίρεση
 " σε περίπτωση λάθους.
 inoremap <C-U> <C-G>u<C-U>
+
+" Το πλήκτρο F2 στην κανονική λειτουργία και στην εισαγωγή θα ενεργοποιεί
+" ή θα απενεργοποιεί την list.
+nmap <silent> <F2> :set list!<cr>
+imap <silent> <F2> <esc>:set list!<cr>a
+" imap <silent> <F2> <C-O>:set list!<cr>
 
 " }}}
 
