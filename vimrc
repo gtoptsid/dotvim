@@ -24,15 +24,20 @@ set backupskip+=/var/spool/cron/*
 set listchars=eol:$,tab:»-,trail:·
 "set listchars=eol:$,tab:\|\ ,trail:·
 
+set autoindent          " Αντιγραφή της εσοχής της προηγούμενης γραμμής
+                        " στην επόμενη. Διορθώνει ένα πρόβλημα.
 set autoread            " Διαβάζει ξανά το αρχείο αν έχει αλλάξει
                         " από τότε που ανοίχθηκε.
 set background=dark     " Το φόντο του τερματικού είναι σκοτεινό.
 set nobackup            " Μη χρήση των αρχείων backup.
+set noexpandtab         " Θα χρησιμοποιούνται Tabs και όχι spaces.
 set history=50          " Διατήρηση των τελευταίων 50 γραμμών στην ιστορία.
 set hlsearch            " Χρωματισμός των αποτελεσμάτων εύρεσης.
 set incsearch           " Τμηματική εύρεση.
 set ruler               " Εμφάνιση της θέσης του δρομέα συνέχεια.
+set shiftwidth=8        " Θα χρησιμοποιούνται 8 spaces για κάθε επίπεδο εσοχής.
 set showcmd             " Εμφάνιση ημιτελών εντολών.
+set tabstop=8           " Το Tab αντιστοιχεί σε 8 spaces.
 set viminfo="NONE"      " Μη χρήση του .viminfo
 
 " }}}
