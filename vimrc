@@ -85,6 +85,8 @@ set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+
+Bundle 'majutsushi/tagbar'
 " }}}
 
 " Εντοπισμός τύπου και συντακτική προβολή {{{
@@ -114,6 +116,13 @@ let g:loaded_netrwPlugin = 1
 let mapleader = ','
 let maplocalleader = ','
 
+" Άνοιγμα της Tagbar στην αριστερή πλευρά αντί για τη δεξιά
+let g:tagbar_left = 1
+" Μείωση του πλάτους του παραθύρου σε 25 χαρακτήρες από 40
+let g:tagbar_width = 25
+" Μεγέθυνση του παραθύρου του vim όταν ανοίγει η Tagbar
+let g:tagbar_expand = 1
+
 " }}}
 
 " Συνδυασμοί πλήκτρων {{{
@@ -138,6 +147,9 @@ imap <silent> <F2> <esc>:set list!<cr>a
 " Το πλήκτρο F3 ρυθμίζει την επιλογή number
 nmap <silent> <F3> :set number!<cr>
 imap <silent> <F3> <esc>:set number!<cr>a
+
+" Το πλήκτρο F4 ανοίγει / κλείνει την Tagbar
+nmap <silent> <F4> :TagbarToggle<cr>
 
 " Το πλήκτρο F5 εκτελεί την εντολή make
 nmap <silent> <F5> :make<cr>
