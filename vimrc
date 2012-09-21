@@ -87,6 +87,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'majutsushi/tagbar'
+Bundle 'ciaranm/securemodelines'
 " }}}
 
 " Εντοπισμός τύπου και συντακτική προβολή {{{
