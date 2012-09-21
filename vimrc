@@ -88,6 +88,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'majutsushi/tagbar'
 Bundle 'ciaranm/securemodelines'
+Bundle 'ervandew/supertab'
 " }}}
 
 " Εντοπισμός τύπου και συντακτική προβολή {{{
@@ -124,6 +125,17 @@ let g:tagbar_width = 25
 " Μεγέθυνση του παραθύρου του vim όταν ανοίγει η Tagbar
 let g:tagbar_expand = 1
 
+" Επιλογή λειτουργίας συμπλήρωσης με βάση το περιεχόμενο
+let g:SuperTabDefaultCompletionType = "context"
+" Αν δεν υπάρχει διαθέσιμη λειτουργία συμπλήρωσης να εκτελεστεί η Smart_Tab
+let g:SuperTabCompletionContexts = ['s:ContextText', 'Smart_Tab']
+" Αν αποτύχει και η Smart_Tab, τότε να εκτελεστεί η keyword συμπλήρωση.
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" Κανονικά το supertab δεν λειτουργεί όταν υπάρχουν χαρακτήρες κενών.
+" Για να αλλάξει αυτό αφαιρείται από τη λίστα το pattern \s ώστε
+" το supertab να λειτουργεί και στην περίπτωση που υπάρχουν κενά
+" και έτσι να μπορεί να εκτελεστεί η Smart_Tab
+let g:SuperTabNoCompleteAfter = []
 " }}}
 
 " Συνδυασμοί πλήκτρων {{{
@@ -208,8 +220,6 @@ augroup vimrcEx
   autocmd FileType c setlocal colorcolumn=+0
   " Πρόσθεση της διαδρομής του αρχείου glibc στην αναζήτηση ετικετών
   autocmd FileType c setlocal tags+=~/.vim/tags/glibc
-  " Χρήση της συνάρτησης Smart_Tab κάθε φορά που πληκτρολογείται το Tab
-  autocmd FileType c inoremap <buffer> <expr> <Tab> <SID>Smart_Tab()
   " Αυτόματη εισαγωγή άδειας σε αρχεία κώδικα της γλώσσας C
   autocmd BufNewFile *.c call <SID>Insert_License()
   " Αυτόματη εισαγωγή προστασίας από πολλαπλή δήλωση σε αρχεία κεφαλίδας
@@ -265,26 +275,24 @@ function! s:Switch_Source_Header()
   endif
 endfunction
 
-function! s:Smart_Tab()
-  if pumvisible()
-    " Όταν είναι ενεργό το μενού μεταφορά στο επόμενο αποτέλεσμα
-    return "\<C-N>"
-  endif
+function! Smart_Tab()
   let l:line = getline('.')                  " Η τρέχουσα γραμμή
   " Από την αρχή μέχρι μια θέση πριν το δρομέα
   let l:str = strpart(l:line, 0, col('.')-1)
 
-  " Συμπλήρωση των πεδίων μιας δομής
-  if (l:str =~ '\.$' || l:str =~ '->$')
-    return "\<C-X>\<C-O>"
+  " Δεν έχουμε αρχείο C οπότε επιστρέφουμε Tab όπως γίνεται κανονικά
+  if (! &cindent)
+    return "\<Tab>"
   endif
 
-  " Έλεγχος
   let l:ind = cindent('.')      " Το επίπεδο εσοχής της τρέχουσας γραμμής
   let l:vcol = virtcol('.')     " Η στήλη στην οποία βρίσκεται ο δρομέας
-  if ((l:vcol < l:ind) && (l:str =~ '^\s*$'))
+
+  if ((l:vcol < l:ind) && (l:str =~ '^\t*$'))
     return "\<Tab>"             " Δεν έχει περάσει το επίπεδο εσοχής άρα Tab
-  else
+  endif
+
+  if ((l:str =~ '^\s*$') || (l:str =~ ' $'))
     let l:num = l:vcol % &sw
     if (l:num != 0)
       " Αριθμός spaces που χρειάζονται για να μεταφερθεί ο δρομέας σε στήλη
