@@ -123,7 +123,8 @@ let g:tagbar_left = 1
 " Μείωση του πλάτους του παραθύρου σε 25 χαρακτήρες από 40
 let g:tagbar_width = 25
 " Μεγέθυνση του παραθύρου του vim όταν ανοίγει η Tagbar
-let g:tagbar_expand = 1
+" ακόμη και όταν το vim τρέχει μέσω τερματικού και όχι GUI.
+let g:tagbar_expand = 2
 
 " Επιλογή λειτουργίας συμπλήρωσης με βάση το περιεχόμενο
 let g:SuperTabDefaultCompletionType = "context"
